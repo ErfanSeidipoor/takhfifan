@@ -1,5 +1,6 @@
 import React from 'react';
 import './index.scss';
+import Product from '../product'
 import APIs from '../../utils/api'
 
 
@@ -27,16 +28,19 @@ import APIs from '../../utils/api'
       products:[],
       },()=>APIs
       .getProducts()
-      .then(rsponse=>this.GetProductSuccess())
+      .then(response=>this.GetProductSuccess(response))
       .catch(error=>this.GetProductFail())
       )
     }
 
     GetProductSuccess(response){
+      console.log(response.data.data.items);
+      
       this.setState({
         getProductWait: false,
         getProductSuccess: true,
         getProductFail: false,
+        products: response.data.data.items,
       })
     }
 
@@ -51,7 +55,11 @@ import APIs from '../../utils/api'
 
     rednerSuccessState() {
       if(this.state.getProductSuccess)
-        return <h1 className="products-success">{"OK"}</h1>
+        return (<div className="products-success">
+          {
+            this.state.products.map( item=> <div className="products-success-product"><Product item={item}/></div>)
+          }
+        </div>)
     }
 
     renderWaitState() {
