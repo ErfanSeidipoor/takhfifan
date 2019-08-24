@@ -1,0 +1,30 @@
+.cart {
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    &-count {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &-dropdown {
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        
+        &-item {
+            height: 100px;
+            background-color: blueviolet;
+
+        }
+    }
+
+}

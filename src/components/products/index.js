@@ -1,7 +1,9 @@
 import React from 'react';
 import './index.scss';
 import Product from '../product'
+import Actions from '../../modules/action'
 import APIs from '../../utils/api'
+import { connect } from 'react-redux'
 
 
  class Products extends React.Component {
@@ -15,6 +17,12 @@ import APIs from '../../utils/api'
         products:[],
       }
     }
+
+    // methods 
+    addToCart(id) {
+      this.props.AddToCart(id);
+    }
+
 
     componentDidMount() {
       this.GetProduct()
@@ -34,14 +42,12 @@ import APIs from '../../utils/api'
     }
 
     GetProductSuccess(response){
-      console.log(response.data.data.items);
-      
+
       this.setState({
         getProductWait: false,
         getProductSuccess: true,
         getProductFail: false,
-        products: response.data.data.items,
-      })
+      },()=>this.props.GetProduct(response.data.data.items))
     }
 
     GetProductFail(error) {
@@ -57,7 +63,10 @@ import APIs from '../../utils/api'
       if(this.state.getProductSuccess)
         return (<div className="products-success">
           {
-            this.state.products.map( item=> <div className="products-success-product"><Product item={item}/></div>)
+            this.props.products.map( item=>
+              <div className="products-success-product" key={item.id}>
+                <Product item={item} addToCart={()=>this.addToCart(item.id)}/>
+              </div>)
           }
         </div>)
     }
@@ -71,6 +80,7 @@ import APIs from '../../utils/api'
       if(this.state.getProductFail)
         return <h1 className="products-fail">{"GETTING DATA IS FAILED"}</h1>
     }
+
     render() {
       return (
         <div className="products">
@@ -82,4 +92,17 @@ import APIs from '../../utils/api'
     }
  }
 
-export default Products;
+
+const mapDispatchToProps = dispatch => ({
+  GetProduct: (products)=>dispatch(Actions.GetProduct(products)),
+  RemoveFromCart: (id)=>dispatch(Actions.RemoveFromCart(id)),
+  AddToCart: (id)=>dispatch(Actions.AddToCart(id)),
+})
+
+
+const mapStateToProps = state => ({
+    products: state.products,
+  }
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products);

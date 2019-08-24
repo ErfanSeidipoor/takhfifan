@@ -1,14 +1,28 @@
 const type = {
-    CREATE_ITEM: "CREATE_ITEM",
-    DELETE_ITEM: "DELETE_ITEM",
+    GET_PRODUCTS: "GET_PRODUCTS",
+    ADD_TO_CART: "ADD_TO_CART",
+    REMOVE_FROM_CART: "REMOVE_FROM_CART",
 }
 
-const createItem = task => ({
-    type: type.CREATE_ITEM,
-    payload: "hello",
+
+const AddToCart = (id) => ({
+    type: type.ADD_TO_CART,
+    payload:id,
+}) 
+
+const RemoveFromCart = (id) => ({
+    type: type.REMOVE_FROM_CART,
+    payload:id,
+})
+
+const GetProduct = products => ({
+    type: type.GET_PRODUCTS,
+    payload:products,
 })
 
 export default {
-    createItem,
+    GetProduct,
+    RemoveFromCart,
+    AddToCart,
     type
 }

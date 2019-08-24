@@ -3,17 +3,16 @@ import './index.scss';
 
 
  class Product extends React.Component {
-    // constructor(props) {
-    //   super(props)
-    // }
     render() {
       return (
         <div className="product">
-            <div className="product-id">id: {this.props.item.id}</div>
-            <div className="product-title">title: {this.props.item.title}</div>
-            <div className="product-soldCount">soldCount: {this.props.item.soldCount}</div>
-            <div className="product-quantity">quantity: {this.props.item.quantity}</div>
-            <div className="product-desc">desc: {this.props.item.desc}</div>
+            <div className="product-img" />
+            <div className="product-title">{this.props.item.title}</div>
+            <div className="product-desc">{this.props.item.desc.substring(0, 120)} ...</div>
+            <div className="product-bottom-section">
+                <div className="product-bottom-section-price">{this.props.item.price}</div>
+                <div className="product-bottom-section-addcart" onClick={()=>this.props.addToCart()}>addcart</div>
+            </div>
         </div>
       );
     }
