@@ -3,4 +3,19 @@
     max-width: 1200px;
     margin: 0 auto;
     background-color: rgba(red , 0.5);
+
+    &-sucess {
+        color: green;
+
+    }
+    &-wait {
+        color: orange;
+        padding: 20px 0;
+        text-align: center;
+    }
+    &-fail {
+        color: orangered;
+        padding: 20px 0;
+        text-align: center;
+    }
 }
