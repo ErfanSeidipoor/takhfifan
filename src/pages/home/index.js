@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import Actions from '../../modules/action'
 import Navbar from '../../components/navbar'
+import Products from '../../components/products'
 import './index.scss';
 
 
@@ -10,7 +11,7 @@ import './index.scss';
       return (
         <div className="home-page">
           <Navbar />
-            <h1 onClick={()=>this.props.createItem()}>Home Page</h1>
+          <Products />
         </div>
       );
    }
